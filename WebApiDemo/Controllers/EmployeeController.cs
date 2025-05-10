@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiDemo.Models;
+using Microsoft.EntityFrameworkCore;
+using WebApiDemo.Dto;
 
 namespace WebApiDemo.Controllers
 {
@@ -34,6 +36,26 @@ namespace WebApiDemo.Controllers
         {
             Employee employee = context.Employees.FirstOrDefault(e => e.Name == name);
             return Ok(employee);
+        }
+
+        [HttpGet("dept/{id}")]
+        public IActionResult GetEmpWithDeptName(int id)
+        {
+            Employee emp = context.Employees.Include(e => e.Department).FirstOrDefault(e => e.Id == id);
+            return Ok(emp);
+        }
+
+        [HttpGet("dto/{id}")]
+        public IActionResult GetEmpWithDeptName2(int id)  //use this way insteed of the previous function
+        {
+            Employee emp = context.Employees.Include(e => e.Department).FirstOrDefault(e => e.Id == id);
+           
+            EmployeeNameWithDepartmentNameDto EmpDto = new EmployeeNameWithDepartmentNameDto();
+            EmpDto.DeptName = emp.Department.Name;
+            EmpDto.EmpName = emp.Name;
+            EmpDto.EmpId = emp.Id;
+
+            return Ok(EmpDto);
         }
 
         [HttpPost]
