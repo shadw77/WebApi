@@ -13,6 +13,8 @@ namespace WebApiDemo.Models
             
         }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department> Department { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=localhost;Database=MyDatabase;Trusted_Connection=True;");
