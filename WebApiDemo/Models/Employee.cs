@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApiDemo.Models
 {
@@ -14,5 +15,9 @@ namespace WebApiDemo.Models
         public int Salary { get; set; }
         public string Address { get; set; }
         public int Age { get; set; }
+
+        [ForeignKey("Department")]
+        public int? Dept_ID { get; set; }
+        public virtual Department? Department { get; set; }
     }
 }

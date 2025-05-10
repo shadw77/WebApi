@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiDemo.Models;
 
@@ -11,9 +12,10 @@ using WebApiDemo.Models;
 namespace WebApiDemo.Migrations
 {
     [DbContext(typeof(ProjectEntity))]
-    partial class ProjectEntityModelSnapshot : ModelSnapshot
+    [Migration("20250510144138_addDepartment")]
+    partial class addDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
