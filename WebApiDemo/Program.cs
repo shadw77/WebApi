@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using WebApiDemo.Models;
 
@@ -21,6 +22,15 @@ namespace WebApiDemo
                 options.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
 
+            builder.Services.AddCors(corsOptions =>
+            {
+                corsOptions.AddPolicy("MyPolicy", corsPolicyBuilder =>
+                {
+                    corsPolicyBuilder.AllowAnyOrigin();
+
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,7 +39,8 @@ namespace WebApiDemo
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseStaticFiles();
+            app.UseCors("MyPolicy");
             app.UseAuthorization();
 
 
