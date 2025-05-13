@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApiDemo.Models
 {
-    public class ProjectEntity:DbContext
+    public class ProjectEntity:IdentityDbContext<ApplicationUser>
     {
         public ProjectEntity() 
         {
